@@ -4,10 +4,10 @@
   "start_url": "https://shaviyani-immunization.github.io/wvssm/register.html",
   "display": "standalone",
   "orientation": "portrait",
-  "scope": "https://shaviyanipublichealth.github.io/wvssm-register/",
+  "scope": "https://shaviyani-immunization.github.io/wvssm/register.html",
   "background_color": "#f8f9fa",
   "theme_color": "#0d6efd",
-  "description": "Register for Web-based Vaccination Supplies Stock Management",
+"description": "Register health facilities in Shaviyani Atoll for the Web-based Vaccination Supplies Stock Management (WVSSM) system.",
   "icons": [
     {
       "src": "https://shaviyanipublichealth.github.io/wvssm-register/icons/icon-192.png",
