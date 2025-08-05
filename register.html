@@ -67,6 +67,40 @@
       clip: rect(0,0,0,0) !important;
       border: 0 !important;
     }
+
+    .text-center h5 {
+  font-weight: 600;  /* semi-bold */
+  font-size: 1.25rem; /* ~20px */
+}
+
+.text-center h5 small {
+  font-weight: 400; /* normal weight for the small */
+  font-size: 0.85rem; /* slightly smaller */
+  color: #666;
+}
+
+.text-center h6 {
+  font-weight: 400;
+  font-size: 1rem;
+  color: #6c757d; /* bootstrap text-secondary color */
+}
+
+/* Mobile (smaller than 576px) */
+@media (max-width: 575.98px) {
+  .text-center h5 {
+    font-weight: 700;  /* bolder on mobile */
+    font-size: 1.1rem; /* ~18px */
+  }
+
+  .text-center h5 small {
+    font-size: 0.75rem; /* smaller on mobile */
+  }
+
+  .text-center h6 {
+    font-size: 0.85rem; /* smaller on mobile */
+  }
+}
+
   </style>
 </head>
 <body class="bg-light">
