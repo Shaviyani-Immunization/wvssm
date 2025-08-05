@@ -439,64 +439,80 @@
   </script>
 
   <!-- iOS Install Prompt (Only on iPhone/iPad) -->
-  <div
-    id="iosInstallPrompt"
-    class="alert alert-info text-center mb-0 py-2"
-    style="display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; background: #e3f2fd; border: none; border-top: 2px solid #2196f3;"
-  >
-    <p class="mb-1">
-      <strong>Install WVSSM</strong><br />
-      Tap the <strong>📤 Share</strong> icon, then <strong>"Add to Home Screen"</strong>
-    </p>
-    <button type="button" class="btn btn-sm btn-outline-primary" onclick="closeIosPrompt()">Maybe Later</button>
-  </div>
+<div
+  id="iosInstallPrompt"
+  class="alert alert-info text-center mb-0 py-2"
+  role="alert"
+  style="display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; background: #e3f2fd; border: none; border-top: 2px solid #2196f3;"
+>
+  <p class="mb-1">
+    <strong>Install WVSSM Registration</strong><br />
+    Tap the <strong>📤 Share</strong> icon, then <strong>"Add to Home Screen"</strong>
+  </p>
+  <button type="button" class="btn btn-sm btn-outline-primary" onclick="dismissIosPrompt()">Maybe Later</button>
+</div>
 
-  <!-- Desktop/Android Install Button -->
-  <button
-    id="installButton"
-    class="btn btn-success"
-    style="display: none; position: fixed; right: 20px; bottom: 20px; z-index: 9999; padding: 12px 18px; border-radius: 50px; font-weight: 600;"
-  >
-    Install WVSSM
-  </button>
+<!-- Android/Desktop Install Button -->
+<button
+  id="installBtn"
+  class="btn btn-success"
+  style="display: none; position: fixed; right: 20px; bottom: 20px; z-index: 9999; padding: 12px 18px; border-radius: 50px; font-weight: 600;"
+>
+  Install WVSSM Registration
+</button>
 
-  <script>
-    // iOS Install Prompt Logic
-    function isIos() {
-      return /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
+<!-- ARIA Live Region for Accessibility -->
+<div aria-live="polite" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(1px,1px,1px,1px);">
+  <span id="installStatus" role="status"></span>
+</div>
+
+<script>
+  // --- iOS Logic ---
+  function isIosDevice() {
+    return /iphone|ipad|ipod/i.test(navigator.userAgent);
+  }
+
+  function isInStandaloneMode() {
+    return ('standalone' in window.navigator) && window.navigator.standalone;
+  }
+
+  function dismissIosPrompt() {
+    document.getElementById('iosInstallPrompt').style.display = 'none';
+    localStorage.setItem('iosPromptDismissed', 'true');
+  }
+
+  window.addEventListener('load', () => {
+    if (isIosDevice() && !isInStandaloneMode() && !localStorage.getItem('iosPromptDismissed')) {
+      document.getElementById('iosInstallPrompt').style.display = 'block';
     }
-    function isInStandaloneMode() {
-      return window.navigator.standalone === true;
+  });
+
+  // --- Android / Desktop PWA Install ---
+  let deferredPrompt;
+  const installBtn = document.getElementById('installBtn');
+  const installStatus = document.getElementById('installStatus');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.style.display = 'block';
+  });
+
+  installBtn.addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+
+    if (outcome === 'accepted') {
+      installBtn.style.display = 'none';
+      installStatus.textContent = 'WVSSM Registration app was installed';
+    } else {
+      installStatus.textContent = 'WVSSM Registration installation was dismissed';
     }
-    function closeIosPrompt() {
-      document.getElementById('iosInstallPrompt').style.display = 'none';
-      localStorage.setItem('iosInstallPromptDismissed', 'true');
-    }
-    window.addEventListener('load', () => {
-      if (isIos() && !isInStandaloneMode() && !localStorage.getItem('iosInstallPromptDismissed')) {
-        document.getElementById('iosInstallPrompt').style.display = 'block';
-      }
-    });
 
-    // PWA Install Button Logic (Desktop & Android)
-    let deferredPrompt;
-    const installButton = document.getElementById('installButton');
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      installButton.style.display = 'block';
-    });
-
-    installButton.addEventListener('click', async () => {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        installButton.style.display = 'none';
-      }
-      deferredPrompt = null;
-    });
-  </script>
+    deferredPrompt = null;
+  });
+</script>
 </body>
 </html>
