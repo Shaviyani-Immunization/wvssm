@@ -1,34 +1,32 @@
 {
-"name": "WVSSM Registration",
-"short_name": "WVSSM Reg",
-  "start_url": "https://shaviyani-immunization.github.io/wvssm/register.html",
+  "name": "WVSSM Registration",
+  "short_name": "WVSSM Reg",
+  "start_url": "/wvssm/register.html",
+  "scope": "/wvssm/",
   "display": "standalone",
   "orientation": "portrait",
-  "scope": "https://shaviyani-immunization.github.io/wvssm/",
   "background_color": "#f8f9fa",
   "theme_color": "#0d6efd",
-"description": "Register health facilities in Shaviyani Atoll for the Web-based Vaccination Supplies Stock Management (WVSSM) system.",
+  "description": "Register for the Web-based Vaccination Supplies Stock Management (WVSSM) system used by Shaviyani Atoll health facilities.",
   "icons": [
     {
-      "src": "https://shaviyani-immunization.github.io/wvssm/register/icons/icon-192.png",
+      "src": "/wvssm/register/icons/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
-      "src": "https://shaviyani-immunization.github.io/wvssm/register/icons/icon-512.png",
+      "src": "/wvssm/register/icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
-      "src": "https://shaviyani-immunization.github.io/wvssm/register/icons/icon-maskable-192.png",
+      "src": "/wvssm/register/icons/icon-maskable-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "https://shaviyani-immunization.github.io/wvssm/register/icons/icon-maskable-512.png",
+      "src": "/wvssm/register/icons/icon-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
