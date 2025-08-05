@@ -1,7 +1,7 @@
 {
 "name": "WVSSM Registration",
 "short_name": "WVSSM Reg",
-  "start_url": "https://shaviyanipublichealth.github.io/wvssm-register//index.html",
+  "start_url": "https://shaviyani-immunization.github.io/wvssm/register.html",
   "display": "standalone",
   "orientation": "portrait",
   "scope": "https://shaviyanipublichealth.github.io/wvssm-register/",
