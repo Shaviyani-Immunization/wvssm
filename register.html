@@ -164,7 +164,7 @@
             <form
               name="submit-to-google-sheet"
               id="registrationForm"
-              action="https://script.google.com/macros/s/AKfycbxbix37d58ZWLXcaFDyANi2jmMFTYdtypDWhXh6yQY1UwqHizIKbkTPqjcSvFP4C6oy/exec"
+              action="https://script.google.com/macros/s/AKfycbzu3qAKwiy758gyFFFOrklHFIEzt4BvwpAJRTcn4KOH6lHq8eiQdVSZjwz2QwGnp_0/exec"
               method="POST"
               novalidate
             >
@@ -280,7 +280,7 @@
   <script>
     let jobTitleSelect, recipientLabelSelect;
 
-    fetch('https://script.google.com/macros/s/AKfycbxbix37d58ZWLXcaFDyANi2jmMFTYdtypDWhXh6yQY1UwqHizIKbkTPqjcSvFP4C6oy/exec')
+    fetch('https://script.google.com/macros/s/AKfycbzu3qAKwiy758gyFFFOrklHFIEzt4BvwpAJRTcn4KOH6lHq8eiQdVSZjwz2QwGnp_0/exec')
       .then((res) => res.json())
       .then((data) => {
         const jobTitles = (data.jobTitles || []).filter((title) => title.trim() !== '');
@@ -424,7 +424,7 @@
   <!-- Form Submission -->
   <script>
     const scriptURL =
-      'https://script.google.com/macros/s/AKfycbxbix37d58ZWLXcaFDyANi2jmMFTYdtypDWhXh6yQY1UwqHizIKbkTPqjcSvFP4C6oy/exec';
+      'https://script.google.com/macros/s/AKfycbzu3qAKwiy758gyFFFOrklHFIEzt4BvwpAJRTcn4KOH6lHq8eiQdVSZjwz2QwGnp_0/exec';
     const form = document.forms['submit-to-google-sheet'];
     const loading = document.querySelector('.js-loading');
     const successMessage = document.querySelector('.js-success-message');
