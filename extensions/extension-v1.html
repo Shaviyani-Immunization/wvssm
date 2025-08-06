@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fetch User Data by ID Number</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+
+<div class="container py-4">
+  <h3 class="mb-4 text-center">Fetch User Data by ID Number</h3>
+
+  <form id="userForm" class="mx-auto" style="max-width: 480px;">
+    <div class="mb-3">
+      <label for="username" class="form-label">Username (idNumber)</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        name="username"
+        placeholder="Enter username / idNumber"
+        autocomplete="off"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="firstName"
+        name="firstName"
+        readonly
+        placeholder="Auto-filled first name"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="lastName"
+        name="lastName"
+        readonly
+        placeholder="Auto-filled last name"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        readonly
+        placeholder="Auto-filled email"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone</label>
+      <input
+        type="tel"
+        class="form-control"
+        id="phone"
+        name="phone"
+        readonly
+        placeholder="Auto-filled phone"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        readonly
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="confirmPassword" class="form-label">Confirm Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="confirmPassword"
+        name="confirmPassword"
+        readonly
+      />
+    </div>
+  </form>
+</div>
+
+<!-- Bootstrap 5 JS Bundle (includes Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycby2P4Alds0QaHfCH9F6RyXypdi8NLdot9pO0L5d-MVvqyuOlnle_Q4Qxapg6xc02rZy/exec';
+
+  document.getElementById('username').addEventListener('change', function () {
+    const idNumber = this.value.trim();
+    if (!idNumber) {
+      clearFields();
+      return;
+    }
+
+    fetch(${GAS_WEB_APP_URL}?idNumber=${encodeURIComponent(idNumber)})
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          alert(data.error);
+          clearFields();
+          return;
+        }
+
+        document.getElementById('firstName').value = data.firstName || '';
+        document.getElementById('lastName').value = data.lastName || '';
+        document.getElementById('email').value = data.email || '';
+        document.getElementById('phone').value = data.phone || '';
+        document.getElementById('password').value = data.password || '';
+        document.getElementById('confirmPassword').value = data.confirmPassword || '';
+      })
+      .catch((err) => {
+        alert('Error fetching data: ' + err.message);
+        clearFields();
+      });
+  });
+
+  function clearFields() {
+    ['firstName', 'lastName', 'email', 'phone', 'password', 'confirmPassword'].forEach(
+      (id) => {
+        document.getElementById(id).value = '';
+      }
+    );
+  }
+</script>
+
+</body>
+</html>
