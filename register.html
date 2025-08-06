@@ -280,7 +280,7 @@
   <script>
     let jobTitleSelect, recipientLabelSelect;
 
-    fetch('https://script.google.com/macros/s/AKfycbzu3qAKwiy758gyFFFOrklHFIEzt4BvwpAJRTcn4KOH6lHq8eiQdVSZjwz2QwGnp_0/exec')
+    fetch('https://script.google.com/macros/s/AKfycbxy063vd6gQ_fy3UUuTV8y9gid1erjHT1oY6WbDUVEzzXvoGA5sc3YFtTwXDPgdCvIB/exec')
       .then((res) => res.json())
       .then((data) => {
         const jobTitles = (data.jobTitles || []).filter((title) => title.trim() !== '');
